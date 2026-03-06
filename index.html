@@ -3,21 +3,17 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Network Scanner</title>
-
 <style>
-/* Body & bubble background */
 body{
   margin:0;
   height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#7b3cff;
   overflow:hidden;
+  background:#7b3cff;
+  perspective:1000px;
   font-family:Arial, sans-serif;
 }
 
-/* Bubbles animation */
+/* Floating bubbles */
 .bubble{
   position:absolute;
   border-radius:50%;
@@ -27,12 +23,12 @@ body{
 }
 
 @keyframes floatUp{
-  0% {transform: translateY(100vh) scale(0);}
+  0% {transform: translateY(100vh) translateX(0) scale(0);}
   50% {opacity:0.7;}
-  100% {transform: translateY(-10vh) scale(1);}
+  100% {transform: translateY(-10vh) translateX(50px) scale(1);}
 }
 
-/* Container / menu card */
+/* 3D pop-out menu card */
 .container{
   position:relative;
   background:white;
@@ -40,14 +36,19 @@ body{
   border-radius:25px;
   width:90%;
   max-width:500px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  box-shadow:0 30px 60px rgba(0,0,0,0.3);
   text-align:center;
-  transform:scale(0.8);
+  transform: rotateX(20deg) rotateY(-10deg) scale(0.85);
   animation:popOut 0.6s forwards;
+  transition:transform 0.3s ease;
+}
+
+.container:hover{
+  transform: rotateX(0deg) rotateY(0deg) scale(1);
 }
 
 @keyframes popOut{
-  to{ transform: scale(1);}
+  to{ transform: rotateX(0deg) rotateY(0deg) scale(1);}
 }
 
 h2{
@@ -129,12 +130,10 @@ button:hover{
   color:#ff4fd8;
   font-weight:bold;
 }
-
 </style>
 </head>
 <body>
 
-<!-- Bubbles -->
 <div id="bubbleContainer"></div>
 
 <div class="container">
@@ -152,9 +151,9 @@ button:hover{
 </div>
 
 <script>
-// Create bubbles
+// Create floating bubbles
 const bubbleContainer = document.getElementById('bubbleContainer');
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
   let b = document.createElement('div');
   b.className='bubble';
   let size = Math.random()*40+20;
@@ -162,10 +161,11 @@ for(let i=0;i<20;i++){
   b.style.height = size+'px';
   b.style.left = Math.random()*100+'vw';
   b.style.animationDuration = (5+Math.random()*5)+'s';
+  b.style.animationDelay = Math.random()*5+'s';
   bubbleContainer.appendChild(b);
 }
 
-// Generate deterministic IP from name
+// Deterministic IP from name
 function nameToIP(name){
   let hash=0
   for(let i=0;i<name.length;i++){
