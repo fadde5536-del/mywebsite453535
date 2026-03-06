@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fullscreen Animated Bubble Background + Neon Glass Menu</title>
+<title>Enhanced Neon Glass Scanner</title>
 <style>
   /* Reset */
   * {
@@ -12,7 +12,7 @@
   body, html {
     margin: 0;
     height: 100%;
-    background: #1a0a4f; /* deep purple */
+    background: linear-gradient(120deg, #1a0a4f, #4f0a7b); /* purple + dark pink gradient */
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -32,32 +32,37 @@
   .bubble {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.3;
-    background: linear-gradient(135deg, #ff4fd8, #7b3cff);
+    opacity: 0.25;
+    background: linear-gradient(135deg, #ff4fd8, #ff84c4, #7b3cff);
     will-change: transform, opacity;
   }
 
   /* Neon glass menu container */
   .container {
-    position: fixed; /* fixed center */
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    padding: 30px;
+    width: 420px;
+    padding: 35px;
     border-radius: 25px;
     background: rgba(255 255 255 / 0.1);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
     box-shadow:
-      0 0 20px #7b3cff88,
       0 0 25px #ff4fd888,
-      inset 0 0 50px #7b3cff55,
-      inset 0 0 30px #ff4fd855;
+      0 0 20px #7b3cff88,
+      inset 0 0 50px #ff4fd855,
+      inset 0 0 30px #7b3cff55;
     color: white;
     text-align: center;
     z-index: 10;
     cursor: default;
+    transition: transform 0.3s ease;
+  }
+
+  .container:hover {
+    transform: translate(-50%, -50%) scale(1.03);
   }
 
   /* Neon rainbow border */
@@ -67,9 +72,9 @@
     top: -3px; left: -3px; right: -3px; bottom: -3px;
     border-radius: 28px;
     padding: 3px;
-    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    background: linear-gradient(90deg, #ff4fd8, #7b3cff, #ff84c4, #7b3cff);
     background-size: 400% 400%;
-    animation: neonShift 10s linear infinite;
+    animation: neonShift 8s linear infinite;
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -79,26 +84,19 @@
     z-index: -1;
   }
   @keyframes neonShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
-  /* Header */
   h2 {
     margin-bottom: 15px;
-    background: linear-gradient(90deg, #7b3cff, #ff4fd8);
+    background: linear-gradient(90deg, #ff4fd8, #7b3cff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: 2rem;
   }
 
-  /* Inputs container */
   .inputGroup {
     display: flex;
     gap: 10px;
@@ -106,32 +104,40 @@
   }
   .inputGroup input {
     flex: 1;
-    padding: 12px;
+    padding: 14px;
     border-radius: 12px;
     border: none;
     background: rgba(255 255 255 / 0.15);
     color: white;
     font-size: 16px;
+    transition: background 0.3s;
+  }
+  .inputGroup input:focus {
+    background: rgba(255 255 255 / 0.25);
+    outline: none;
   }
   .inputGroup input::placeholder {
     color: rgba(255 255 255 / 0.7);
   }
 
-  /* Button */
   button {
     width: 100%;
     margin-top: 15px;
-    padding: 12px;
+    padding: 14px;
     border-radius: 12px;
     border: none;
-    background: linear-gradient(90deg, #7b3cff, #ff4fd8);
+    background: linear-gradient(90deg, #ff4fd8, #7b3cff);
     color: white;
     font-size: 16px;
     cursor: pointer;
     user-select: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff4fd8;
   }
 
-  /* Terminal output */
   #terminal {
     margin-top: 20px;
     font-family: monospace;
@@ -140,7 +146,6 @@
     min-height: 80px;
   }
 
-  /* Progress bar background */
   .progress {
     margin-top: 15px;
     height: 10px;
@@ -149,22 +154,19 @@
     overflow: hidden;
     width: 100%;
   }
-
-  /* Progress bar fill */
   .bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #7b3cff, #ff4fd8);
+    background: linear-gradient(90deg, #ff4fd8, #7b3cff);
     transition: width 0.6s ease;
   }
 
-  /* Only for Luke & Irene text */
   .onlyFor {
     position: absolute;
     top: 10px;
     right: 15px;
     font-size: 14px;
-    color: #ff4fd8;
+    color: #ff84c4;
     font-weight: bold;
     user-select: none;
   }
@@ -179,7 +181,7 @@
   <h2>Network Scanner</h2>
   <div class="inputGroup">
     <input id="nameInput" type="text" placeholder="Enter name" />
-    <input id="customIP" type="text" placeholder="Enter IP" />
+    <input id="customIP" type="text" placeholder="Enter IP (7 digits)" />
   </div>
   <button onclick="startScan()">Scan</button>
   <div id="terminal"></div>
@@ -189,48 +191,44 @@
 </div>
 
 <script>
-  // Create 30 bubbles with random sizes, positions, animation speed
+  // Animated bubbles
   const bubbleContainer = document.getElementById("bubbleContainer");
   const bubbles = [];
-
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 35; i++) {
     const bubble = document.createElement("div");
     bubble.className = "bubble";
-    const size = Math.random() * 80 + 40; // 40px to 120px
+    const size = 40 + Math.random() * 100;
     bubble.style.width = size + "px";
     bubble.style.height = size + "px";
     bubble.style.left = Math.random() * 100 + "vw";
-    bubble.style.bottom = -size + "px"; // start below screen
-    bubble.style.opacity = (0.2 + Math.random() * 0.3).toFixed(2);
+    bubble.style.bottom = -size + "px";
     bubbleContainer.appendChild(bubble);
     bubbles.push({
       el: bubble,
       size: size,
       xBase: parseFloat(bubble.style.left),
       y: -size,
-      speed: 10 + Math.random() * 10, // vertical speed px per sec
-      driftAmplitude: 30 + Math.random() * 30, // horizontal drift px
-      driftSpeed: 0.5 + Math.random(), // drift cycles per sec
-      opacitySpeed: 1 + Math.random() * 1.5,
-      scaleSpeed: 0.5 + Math.random()
+      speed: 10 + Math.random() * 15,
+      driftAmplitude: 30 + Math.random() * 50,
+      driftSpeed: 0.5 + Math.random(),
+      opacitySpeed: 0.5 + Math.random(),
+      scaleSpeed: 0.3 + Math.random()
     });
   }
 
   let lastTime = performance.now();
-
   function animateBubbles(time = performance.now()) {
-    const dt = (time - lastTime) / 1000; // delta seconds
+    const dt = (time - lastTime) / 1000;
     lastTime = time;
     bubbles.forEach((b, i) => {
       b.y += b.speed * dt;
       if (b.y > window.innerHeight + b.size) {
-        b.y = -b.size; // reset to bottom
-        b.xBase = Math.random() * 100; // new horizontal start vw
+        b.y = -b.size;
+        b.xBase = Math.random() * 100;
       }
-      const driftX = b.driftAmplitude * Math.sin(time / 1000 * b.driftSpeed * 2 * Math.PI);
-      const opacity = 0.25 + 0.15 * Math.sin(time / 1000 * b.opacitySpeed * 2 * Math.PI + i);
-      const scale = 0.85 + 0.3 * Math.sin(time / 1000 * b.scaleSpeed * 2 * Math.PI + i);
-
+      const driftX = b.driftAmplitude * Math.sin(time/1000 * b.driftSpeed * 2*Math.PI);
+      const opacity = 0.2 + 0.2 * Math.sin(time/1000 * b.opacitySpeed * 2*Math.PI + i);
+      const scale = 0.85 + 0.3 * Math.sin(time/1000 * b.scaleSpeed * 2*Math.PI + i);
       b.el.style.transform = `translateX(${driftX}px) translateY(${window.innerHeight - b.y}px) scale(${scale.toFixed(2)})`;
       b.el.style.opacity = opacity.toFixed(2);
       b.el.style.left = b.xBase + "vw";
@@ -239,80 +237,61 @@
   }
   animateBubbles();
 
-  // Menu follows cursor movement (small float effect)
+  // Menu float with cursor
   const menu = document.getElementById("menu");
   document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX - window.innerWidth / 2) / 40;
-    const y = (e.clientY - window.innerHeight / 2) / 40;
+    const x = (e.clientX - window.innerWidth/2)/40;
+    const y = (e.clientY - window.innerHeight/2)/40;
     menu.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
   });
 
-  // Generate deterministic IP from name
+  // Deterministic IP from name
   function nameToIP(name) {
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-      hash = name.charCodeAt(i) + (hash << 5) - hash;
-    }
-    const ip = [
-      (hash >> 24) & 255,
-      (hash >> 16) & 255,
-      (hash >> 8) & 255,
-      hash & 255,
-    ].map((n) => Math.abs(n) % 256);
+    let hash=0;
+    for(let i=0;i<name.length;i++){hash=name.charCodeAt(i)+(hash<<5)-hash;}
+    const ip=[(hash>>24)&255,(hash>>16)&255,(hash>>8)&255,hash&255].map(n=>Math.abs(n)%256);
     return ip.join(".");
   }
 
-  // Typing effect for terminal output
-  function typeText(text, delay) {
-    const terminal = document.getElementById("terminal");
-    setTimeout(() => {
-      const line = document.createElement("div");
+  function typeText(text, delay){
+    const terminal=document.getElementById("terminal");
+    setTimeout(()=>{
+      const line=document.createElement("div");
       terminal.appendChild(line);
-      let i = 0;
-      const interval = setInterval(() => {
-        line.textContent += text[i];
+      let i=0;
+      const interval=setInterval(()=>{
+        line.textContent+=text[i];
         i++;
-        if (i >= text.length) clearInterval(interval);
-      }, 20);
+        if(i>=text.length) clearInterval(interval);
+      },20);
     }, delay);
   }
 
-  // Start fake scan
-  function startScan() {
-    const name = document.getElementById("nameInput").value.trim();
-    const customIP = document.getElementById("customIP").value.trim();
-    const terminal = document.getElementById("terminal");
-    const bar = document.getElementById("bar");
+  function startScan(){
+    const name=document.getElementById("nameInput").value.trim();
+    const customIP=document.getElementById("customIP").value.trim();
+    const terminal=document.getElementById("terminal");
+    const bar=document.getElementById("bar");
+    terminal.innerHTML="";
+    bar.style.width="0%";
 
-    terminal.innerHTML = "";
-    bar.style.width = "0%";
+    let ip = "";
 
-    if (name === "") {
-      terminal.innerHTML = "Enter a name first.";
+    if(customIP.length === 7 && /^\d+$/.test(customIP)){
+      ip = customIP;
+    } else if(name !== ""){
+      ip = nameToIP(name);
+    } else {
+      terminal.innerHTML="Enter a valid name or 7-digit IP first.";
       return;
     }
 
-    const ip = customIP || nameToIP(name);
-
-    typeText(`Searching database for ${name}...`, 0);
-    setTimeout(() => {
-      bar.style.width = "25%";
-      typeText(`IP located: ${ip}`, 200);
-    }, 1200);
-    setTimeout(() => {
-      bar.style.width = "50%";
-      typeText("Connecting to phone number...", 200);
-    }, 2600);
-    setTimeout(() => {
-      bar.style.width = "75%";
-      typeText("Establishing encrypted tunnel...", 200);
-    }, 4200);
-    setTimeout(() => {
-      bar.style.width = "100%";
-      typeText("DUALHOOKED!", 200);
-    }, 5600);
+    typeText(`Searching database for ${name || 'custom IP'}...`,0);
+    setTimeout(()=>{bar.style.width="25%"; typeText(`IP located: ${ip}`,200);},1200);
+    setTimeout(()=>{bar.style.width="50%"; typeText("Connecting to phone number...",200);},2600);
+    setTimeout(()=>{bar.style.width="75%"; typeText("Establishing encrypted tunnel...",200);},4200);
+    setTimeout(()=>{bar.style.width="100%"; typeText("DUALHOOKED!",200);},5600);
   }
 </script>
-
 </body>
 </html>
