@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Full Screen Neon Glass Menu</title>
+<title>Fullscreen Animated Bubble Background + Neon Glass Menu</title>
 <style>
   /* Reset */
   * {
@@ -12,54 +12,40 @@
   body, html {
     margin: 0;
     height: 100%;
-    background: #1a0a4f;
+    background: #1a0a4f; /* deep purple */
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    perspective: 1000px;
   }
 
-  /* Bubbles container */
+  /* Fullscreen bubbles container behind everything */
   #bubbleContainer {
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    overflow: visible;
     z-index: 0;
+    overflow: visible;
   }
 
-  /* Individual bubble style */
+  /* Bubble style */
   .bubble {
     position: absolute;
     border-radius: 50%;
     opacity: 0.3;
     background: linear-gradient(135deg, #ff4fd8, #7b3cff);
-    animation: floatUp linear infinite;
-  }
-  @keyframes floatUp {
-    0% {
-      transform: translateY(100vh) translateX(0) scale(0);
-    }
-    50% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(-10vh) translateX(50px) scale(1);
-    }
+    will-change: transform, opacity;
   }
 
-  /* Full screen glass container with neon border */
+  /* Neon glass menu container */
   .container {
-    position: relative;
-    width: 90vw;
-    max-width: 900px;
-    height: 90vh;
+    position: fixed; /* fixed center */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 30px;
     border-radius: 25px;
-    padding: 40px 60px;
     background: rgba(255 255 255 / 0.1);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -71,14 +57,10 @@
     color: white;
     text-align: center;
     z-index: 10;
-    border-radius: 25px;
     cursor: default;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
   }
 
-  /* Neon border animated with background-clip */
+  /* Neon rainbow border */
   .container::before {
     content: '';
     position: absolute;
@@ -110,28 +92,26 @@
 
   /* Header */
   h2 {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     background: linear-gradient(90deg, #7b3cff, #ff4fd8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2.4rem;
   }
 
   /* Inputs container */
   .inputGroup {
     display: flex;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 10px;
   }
-  /* Input style */
   .inputGroup input {
     flex: 1;
-    padding: 16px;
+    padding: 12px;
     border-radius: 12px;
     border: none;
     background: rgba(255 255 255 / 0.15);
     color: white;
-    font-size: 18px;
+    font-size: 16px;
   }
   .inputGroup input::placeholder {
     color: rgba(255 255 255 / 0.7);
@@ -140,35 +120,32 @@
   /* Button */
   button {
     width: 100%;
-    margin-top: 25px;
-    padding: 16px;
+    margin-top: 15px;
+    padding: 12px;
     border-radius: 12px;
     border: none;
     background: linear-gradient(90deg, #7b3cff, #ff4fd8);
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     user-select: none;
   }
 
   /* Terminal output */
   #terminal {
-    margin-top: 30px;
+    margin-top: 20px;
     font-family: monospace;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.6;
-    min-height: 100px;
-    flex-grow: 1;
-    overflow-y: auto;
-    text-align: left;
+    min-height: 80px;
   }
 
   /* Progress bar background */
   .progress {
-    margin-top: 20px;
-    height: 14px;
+    margin-top: 15px;
+    height: 10px;
     background: rgba(255 255 255 / 0.2);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     width: 100%;
   }
@@ -181,27 +158,15 @@
     transition: width 0.6s ease;
   }
 
-  /* "Only for Luke & Irene" text */
+  /* Only for Luke & Irene text */
   .onlyFor {
     position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 16px;
+    top: 10px;
+    right: 15px;
+    font-size: 14px;
     color: #ff4fd8;
     font-weight: bold;
     user-select: none;
-  }
-
-  /* Scrollbar for terminal */
-  #terminal::-webkit-scrollbar {
-    width: 8px;
-  }
-  #terminal::-webkit-scrollbar-thumb {
-    background: #7b3cff88;
-    border-radius: 4px;
-  }
-  #terminal::-webkit-scrollbar-track {
-    background: transparent;
   }
 </style>
 </head>
@@ -224,26 +189,62 @@
 </div>
 
 <script>
-  // Create floating bubbles
+  // Create 30 bubbles with random sizes, positions, animation speed
   const bubbleContainer = document.getElementById("bubbleContainer");
-  for (let i = 0; i < 20; i++) {
-    const b = document.createElement("div");
-    b.className = "bubble";
-    const size = Math.random() * 80 + 40;
-    b.style.width = size + "px";
-    b.style.height = size + "px";
-    b.style.left = Math.random() * 100 + "vw";
-    b.style.animationDuration = 8 + Math.random() * 5 + "s";
-    b.style.animationDelay = Math.random() * 5 + "s";
-    bubbleContainer.appendChild(b);
+  const bubbles = [];
+
+  for (let i = 0; i < 30; i++) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    const size = Math.random() * 80 + 40; // 40px to 120px
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "vw";
+    bubble.style.bottom = -size + "px"; // start below screen
+    bubble.style.opacity = (0.2 + Math.random() * 0.3).toFixed(2);
+    bubbleContainer.appendChild(bubble);
+    bubbles.push({
+      el: bubble,
+      size: size,
+      xBase: parseFloat(bubble.style.left),
+      y: -size,
+      speed: 10 + Math.random() * 10, // vertical speed px per sec
+      driftAmplitude: 30 + Math.random() * 30, // horizontal drift px
+      driftSpeed: 0.5 + Math.random(), // drift cycles per sec
+      opacitySpeed: 1 + Math.random() * 1.5,
+      scaleSpeed: 0.5 + Math.random()
+    });
   }
 
-  // Menu follows cursor movement
+  let lastTime = performance.now();
+
+  function animateBubbles(time = performance.now()) {
+    const dt = (time - lastTime) / 1000; // delta seconds
+    lastTime = time;
+    bubbles.forEach((b, i) => {
+      b.y += b.speed * dt;
+      if (b.y > window.innerHeight + b.size) {
+        b.y = -b.size; // reset to bottom
+        b.xBase = Math.random() * 100; // new horizontal start vw
+      }
+      const driftX = b.driftAmplitude * Math.sin(time / 1000 * b.driftSpeed * 2 * Math.PI);
+      const opacity = 0.25 + 0.15 * Math.sin(time / 1000 * b.opacitySpeed * 2 * Math.PI + i);
+      const scale = 0.85 + 0.3 * Math.sin(time / 1000 * b.scaleSpeed * 2 * Math.PI + i);
+
+      b.el.style.transform = `translateX(${driftX}px) translateY(${window.innerHeight - b.y}px) scale(${scale.toFixed(2)})`;
+      b.el.style.opacity = opacity.toFixed(2);
+      b.el.style.left = b.xBase + "vw";
+    });
+    requestAnimationFrame(animateBubbles);
+  }
+  animateBubbles();
+
+  // Menu follows cursor movement (small float effect)
   const menu = document.getElementById("menu");
   document.addEventListener("mousemove", (e) => {
     const x = (e.clientX - window.innerWidth / 2) / 40;
     const y = (e.clientY - window.innerHeight / 2) / 40;
-    menu.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    menu.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
   });
 
   // Generate deterministic IP from name
