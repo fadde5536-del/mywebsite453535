@@ -1,136 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neon Glass Menu</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neon Glass Menu Clean</title>
 <style>
-body{
-  margin:0;
-  height:100vh;
-  overflow:hidden;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:Arial, sans-serif;
-  perspective:1000px;
-}
+  /* Reset & Body */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #1a0a4f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    perspective: 1000px;
+  }
 
-/* Floating bubbles */
-.bubble{
-  position:absolute;
-  border-radius:50%;
-  opacity:0.3;
-  background:linear-gradient(135deg,#ff4fd8,#7b3cff);
-  animation:floatUp linear infinite;
-}
+  /* Floating bubbles */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+    background: linear-gradient(135deg, #ff4fd8, #7b3cff);
+    animation: floatUp linear infinite;
+  }
 
-@keyframes floatUp{
-  0% {transform: translateY(100vh) translateX(0) scale(0);}
-  50% {opacity:0.7;}
-  100% {transform: translateY(-10vh) translateX(50px) scale(1);}
-}
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) translateX(0) scale(0);
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(-10vh) translateX(50px) scale(1);
+    }
+  }
 
-/* Glass menu with neon edges */
-.container{
-  width: 400px;
-  padding: 30px;
-  border-radius: 25px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 2px solid;
-  border-image-slice: 1;
-  border-width: 3px;
-  border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-  box-shadow: 0 0 20px rgba(255,255,255,0.1), 0 0 15px #ff4fd8, 0 0 25px #7b3cff;
-  color:white;
-  text-align:center;
-  position:relative;
-  transition: transform 0.1s ease;
-}
+  /* Neon Glass Menu Container */
+  .container {
+    position: relative;
+    width: 400px;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255 255 255 / 0.1);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 3px solid transparent;
+    border-radius: 25px;
+    color: white;
+    text-align: center;
+    box-shadow:
+      0 0 8px #7b3cff88,
+      0 0 20px #ff4fd888,
+      inset 0 0 50px #7b3cff55,
+      inset 0 0 20px #ff4fd855;
+    background-clip: padding-box;
+  }
 
-/* Animated neon border */
-@keyframes neonRainbow{
-  0%{border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);}
-  50%{border-image-source: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);}
-  100%{border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);}
-}
+  /* Neon Gradient Border with no lines */
+  .container::before {
+    content: "";
+    position: absolute;
+    top: -3px; bottom: -3px; left: -3px; right: -3px;
+    border-radius: 28px;
+    padding: 3px;
+    background: linear-gradient(270deg, 
+      red, orange, yellow, green, blue, indigo, violet, red);
+    background-size: 1400% 1400%;
+    animation: neonGlow 15s linear infinite;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: -1;
+  }
 
-.container{
-  animation: neonRainbow 4s linear infinite;
-}
+  @keyframes neonGlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 
-h2{
-  margin-bottom:15px;
-  background:linear-gradient(90deg,#7b3cff,#ff4fd8);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+  h2 {
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #7b3cff, #ff4fd8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-.inputGroup{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-}
+  .inputGroup {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
 
-.inputGroup input{
-  flex:1;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  background: rgba(255,255,255,0.15);
-  color:white;
-  font-size:16px;
-}
+  .inputGroup input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255 255 255 / 0.15);
+    color: white;
+    font-size: 16px;
+  }
 
-.inputGroup input::placeholder{
-  color: rgba(255,255,255,0.7);
-}
+  .inputGroup input::placeholder {
+    color: rgba(255 255 255 / 0.7);
+  }
 
-button{
-  width:100%;
-  padding:12px;
-  margin-top:15px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(90deg,#7b3cff,#ff4fd8);
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #7b3cff, #ff4fd8);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+  }
 
-#terminal{
-  margin-top:20px;
-  font-family:monospace;
-  font-size:14px;
-  line-height:1.6;
-  min-height:80px;
-}
+  #terminal {
+    margin-top: 20px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 80px;
+  }
 
-.progress{
-  margin-top:15px;
-  height:10px;
-  background: rgba(255,255,255,0.2);
-  border-radius:10px;
-  overflow:hidden;
-  width:100%;
-}
+  .progress {
+    margin-top: 15px;
+    height: 10px;
+    background: rgba(255 255 255 / 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+  }
 
-.bar{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#7b3cff,#ff4fd8);
-  transition:width .6s ease;
-}
+  .bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7b3cff, #ff4fd8);
+    transition: width 0.6s ease;
+  }
 
-.onlyFor{
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:14px;
-  color:#ff4fd8;
-  font-weight:bold;
-}
+  .onlyFor {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 14px;
+    color: #ff4fd8;
+    font-weight: bold;
+    user-select: none;
+  }
 </style>
 </head>
 <body>
@@ -141,8 +178,8 @@ button{
   <div class="onlyFor">Only for Luke & Irene ❤️</div>
   <h2>Network Scanner</h2>
   <div class="inputGroup">
-    <input id="nameInput" type="text" placeholder="Enter name">
-    <input id="customIP" type="text" placeholder="Enter IP">
+    <input id="nameInput" type="text" placeholder="Enter name" />
+    <input id="customIP" type="text" placeholder="Enter IP" />
   </div>
   <button onclick="startScan()">Scan</button>
   <div id="terminal"></div>
@@ -152,92 +189,93 @@ button{
 </div>
 
 <script>
-// Floating bubbles
-const bubbleContainer = document.getElementById('bubbleContainer');
-for(let i=0;i<20;i++){
-  let b = document.createElement('div');
-  b.className='bubble';
-  let size = Math.random()*80+40;
-  b.style.width = size+'px';
-  b.style.height = size+'px';
-  b.style.left = Math.random()*100+'vw';
-  b.style.animationDuration = (8+Math.random()*5)+'s';
-  b.style.animationDelay = Math.random()*5+'s';
-  bubbleContainer.appendChild(b);
-}
-
-// Menu follows cursor
-const menu = document.getElementById("menu");
-document.addEventListener("mousemove", e=>{
-  const x = (e.clientX - window.innerWidth/2)/40;
-  const y = (e.clientY - window.innerHeight/2)/40;
-  menu.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-});
-
-// Deterministic IP
-function nameToIP(name){
-  let hash=0
-  for(let i=0;i<name.length;i++){
-    hash=name.charCodeAt(i)+((hash<<5)-hash)
-  }
-  let ip=[
-    (hash>>24)&255,
-    (hash>>16)&255,
-    (hash>>8)&255,
-    hash&255
-  ].map(n=>Math.abs(n)%256)
-  return ip.join(".")
-}
-
-// Typing effect
-function typeText(text, delay){
-  let terminal=document.getElementById("terminal")
-  setTimeout(()=>{
-    let line=document.createElement("div")
-    terminal.appendChild(line)
-    let i=0
-    let interval=setInterval(()=>{
-      line.textContent+=text[i]
-      i++
-      if(i>=text.length) clearInterval(interval)
-    },20)
-  },delay)
-}
-
-function startScan(){
-  let name=document.getElementById("nameInput").value.trim()
-  let customIP=document.getElementById("customIP").value.trim()
-  let terminal=document.getElementById("terminal")
-  let bar=document.getElementById("bar")
-
-  terminal.innerHTML=""
-  bar.style.width="0%"
-
-  if(name===""){
-    terminal.innerHTML="Enter a name first."
-    return
+  // Create big floating bubbles
+  const bubbleContainer = document.getElementById("bubbleContainer");
+  for (let i = 0; i < 20; i++) {
+    let b = document.createElement("div");
+    b.className = "bubble";
+    let size = Math.random() * 80 + 40;
+    b.style.width = size + "px";
+    b.style.height = size + "px";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.animationDuration = 8 + Math.random() * 5 + "s";
+    b.style.animationDelay = Math.random() * 5 + "s";
+    bubbleContainer.appendChild(b);
   }
 
-  let ip = customIP || nameToIP(name)
+  // Menu follows cursor
+  const menu = document.getElementById("menu");
+  document.addEventListener("mousemove", (e) => {
+    const x = (e.clientX - window.innerWidth / 2) / 40;
+    const y = (e.clientY - window.innerHeight / 2) / 40;
+    menu.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  });
 
-  typeText("Searching database for "+name+"...",0)
-  setTimeout(()=>{
-    bar.style.width="25%"
-    typeText("IP located: "+ip,200)
-  },1200)
-  setTimeout(()=>{
-    bar.style.width="50%"
-    typeText("Connecting to phone number...",200)
-  },2600)
-  setTimeout(()=>{
-    bar.style.width="75%"
-    typeText("Establishing encrypted tunnel...",200)
-  },4200)
-  setTimeout(()=>{
-    bar.style.width="100%"
-    typeText("DUALHOOKED!",200)
-  },5600)
-}
+  // Deterministic IP generator
+  function nameToIP(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + (hash << 5) - hash;
+    }
+    let ip = [
+      (hash >> 24) & 255,
+      (hash >> 16) & 255,
+      (hash >> 8) & 255,
+      hash & 255,
+    ].map((n) => Math.abs(n) % 256);
+    return ip.join(".");
+  }
+
+  // Typing effect for messages
+  function typeText(text, delay) {
+    let terminal = document.getElementById("terminal");
+    setTimeout(() => {
+      let line = document.createElement("div");
+      terminal.appendChild(line);
+      let i = 0;
+      let interval = setInterval(() => {
+        line.textContent += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 20);
+    }, delay);
+  }
+
+  // Start the fake scan
+  function startScan() {
+    let name = document.getElementById("nameInput").value.trim();
+    let customIP = document.getElementById("customIP").value.trim();
+    let terminal = document.getElementById("terminal");
+    let bar = document.getElementById("bar");
+
+    terminal.innerHTML = "";
+    bar.style.width = "0%";
+
+    if (name === "") {
+      terminal.innerHTML = "Enter a name first.";
+      return;
+    }
+
+    let ip = customIP || nameToIP(name);
+
+    typeText("Searching database for " + name + "...", 0);
+    setTimeout(() => {
+      bar.style.width = "25%";
+      typeText("IP located: " + ip, 200);
+    }, 1200);
+    setTimeout(() => {
+      bar.style.width = "50%";
+      typeText("Connecting to phone number...", 200);
+    }, 2600);
+    setTimeout(() => {
+      bar.style.width = "75%";
+      typeText("Establishing encrypted tunnel...", 200);
+    }, 4200);
+    setTimeout(() => {
+      bar.style.width = "100%";
+      typeText("DUALHOOKED!", 200);
+    }, 5600);
+  }
 </script>
 
 </body>
