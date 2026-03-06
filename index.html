@@ -11,6 +11,9 @@ body{
   background:#7b3cff;
   perspective:1200px;
   font-family:Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 /* Floating bubbles */
@@ -28,7 +31,7 @@ body{
   100% {transform: translateY(-10vh) translateX(50px) scale(1);}
 }
 
-/* Glass 3D menu card */
+/* Centered glass 3D menu */
 .container{
   position:relative;
   background: rgba(255, 255, 255, 0.1);
@@ -37,7 +40,7 @@ body{
   width:90%;
   max-width:500px;
   padding:30px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25),
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25),
               0 0 30px rgba(255,79,216,0.2) inset;
   text-align:center;
   transform-style: preserve-3d;
@@ -45,6 +48,7 @@ body{
   animation:popOut 0.6s forwards;
   transition: transform 0.3s ease;
   border: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
 }
 
 .container:hover{
@@ -147,7 +151,7 @@ button:hover{
 
 <div id="bubbleContainer"></div>
 
-<div class="container">
+<div class="container" id="menu">
   <div class="onlyFor">Only for Luke & Irene ❤️</div>
   <h2>Network Scanner</h2>
   <div class="inputGroup">
@@ -162,16 +166,16 @@ button:hover{
 </div>
 
 <script>
-// Create floating bubbles
+// Create bigger floating bubbles
 const bubbleContainer = document.getElementById('bubbleContainer');
-for(let i=0;i<25;i++){
+for(let i=0;i<20;i++){
   let b = document.createElement('div');
   b.className='bubble';
-  let size = Math.random()*40+20;
+  let size = Math.random()*80+40; // bigger bubbles
   b.style.width = size+'px';
   b.style.height = size+'px';
   b.style.left = Math.random()*100+'vw';
-  b.style.animationDuration = (5+Math.random()*5)+'s';
+  b.style.animationDuration = (8+Math.random()*5)+'s';
   b.style.animationDelay = Math.random()*5+'s';
   bubbleContainer.appendChild(b);
 }
