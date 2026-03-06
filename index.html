@@ -8,7 +8,7 @@
 
 body{
 font-family:Arial, sans-serif;
-background:#f4f6f8;
+background:linear-gradient(135deg,#6b3df5,#9b5cff);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -19,25 +19,38 @@ margin:0;
 .container{
 background:white;
 padding:30px;
-border-radius:20px;
+border-radius:25px;
 width:90%;
 max-width:420px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
 text-align:center;
-animation:fadeIn 0.8s ease;
+animation:floatIn 0.8s ease;
+transition:transform .3s;
+}
+
+.container:hover{
+transform:translateY(-4px);
 }
 
 h2{
 margin-bottom:15px;
+color:#6b3df5;
 }
 
 input{
 width:100%;
 padding:12px;
-border-radius:10px;
-border:1px solid #ccc;
+border-radius:12px;
+border:2px solid #eee;
 margin-top:10px;
 font-size:16px;
+transition:border .3s, box-shadow .3s;
+}
+
+input:focus{
+border-color:#8a63ff;
+box-shadow:0 0 8px rgba(138,99,255,0.5);
+outline:none;
 }
 
 button{
@@ -45,17 +58,18 @@ width:100%;
 padding:12px;
 margin-top:15px;
 border:none;
-border-radius:10px;
-background:#4CAF50;
+border-radius:12px;
+background:#7b4dff;
 color:white;
 font-size:16px;
 cursor:pointer;
-transition:transform 0.2s, box-shadow 0.2s;
+transition:transform .2s, box-shadow .2s, background .3s;
 }
 
 button:hover{
+background:#6a3cff;
 transform:translateY(-2px);
-box-shadow:0 5px 10px rgba(0,0,0,0.15);
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
 
 #terminal{
@@ -63,8 +77,9 @@ margin-top:20px;
 text-align:left;
 font-family:monospace;
 font-size:14px;
-color:#333;
 line-height:1.6;
+color:#333;
+min-height:80px;
 }
 
 .progress{
@@ -78,22 +93,28 @@ overflow:hidden;
 .bar{
 height:100%;
 width:0%;
-background:#4CAF50;
-transition:width 0.6s ease;
+background:linear-gradient(90deg,#7b4dff,#b07cff);
+transition:width .6s ease;
 }
 
-.fadeLine{
+@keyframes floatIn{
+from{
 opacity:0;
-animation:fadeLine 0.6s forwards;
+transform:translateY(20px) scale(.95);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(15px);}
-to{opacity:1; transform:translateY(0);}
+.typing{
+border-right:2px solid #7b4dff;
+animation:blink .8s infinite;
 }
 
-@keyframes fadeLine{
-to{opacity:1;}
+@keyframes blink{
+50%{border-color:transparent;}
 }
 
 </style>
@@ -119,53 +140,71 @@ to{opacity:1;}
 
 <script>
 
-function randomIP(){
-return Math.floor(Math.random()*256)+"."+
-Math.floor(Math.random()*256)+"."+
-Math.floor(Math.random()*256)+"."+
-Math.floor(Math.random()*256);
+function nameToIP(name){
+let hash=0
+for(let i=0;i<name.length;i++){
+hash=name.charCodeAt(i)+((hash<<5)-hash)
 }
 
-function addLine(text){
-let terminal = document.getElementById("terminal")
-let line = document.createElement("div")
-line.className="fadeLine"
-line.innerHTML=text
+let ip=[
+(hash>>24)&255,
+(hash>>16)&255,
+(hash>>8)&255,
+hash&255
+].map(n=>Math.abs(n)%256)
+
+return ip.join(".")
+}
+
+function typeLine(text,delay){
+let terminal=document.getElementById("terminal")
+
+setTimeout(()=>{
+let line=document.createElement("div")
+line.textContent=text
 terminal.appendChild(line)
+terminal.scrollTop=terminal.scrollHeight
+},delay)
+
 }
 
 function startScan(){
 
-let name=document.getElementById("nameInput").value
-let bar=document.getElementById("bar")
+let name=document.getElementById("nameInput").value.trim()
 let terminal=document.getElementById("terminal")
+let bar=document.getElementById("bar")
 
 terminal.innerHTML=""
 bar.style.width="0%"
 
-let ip=randomIP()
+if(name===""){
+terminal.innerHTML="Enter a name first."
+return
+}
 
-addLine("Searching database for "+name+"...")
+let ip=nameToIP(name)
+
+typeLine("Searching database for "+name+"...",0)
 
 setTimeout(()=>{
-addLine("IP located: "+ip)
 bar.style.width="25%"
-},1500)
+typeLine("IP located: "+ip,100)
+},1200)
 
 setTimeout(()=>{
-addLine("Connecting to phone number...")
 bar.style.width="50%"
-},3000)
+typeLine("Connecting to phone number...",100)
+},2600)
 
 setTimeout(()=>{
-addLine("Establishing connection...")
 bar.style.width="75%"
-},4500)
+typeLine("Establishing encrypted tunnel...",100)
+},4000)
 
 setTimeout(()=>{
-addLine("<b>DUALHOOKED!</b>")
 bar.style.width="100%"
-},6000)
+typeLine("DUALHOOKED!",100)
+},5400)
 
 }
 
@@ -173,3 +212,4 @@ bar.style.width="100%"
 
 </body>
 </html>
+
