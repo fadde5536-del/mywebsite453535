@@ -1,77 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Dualhook Demo</title>
+<title>Dualhook Terminal</title>
 
 <style>
+
 body{
-    font-family: Arial, sans-serif;
-    background:#0f172a;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+background:black;
+color:#00ff00;
+font-family:monospace;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
 .container{
-    background:#1e293b;
-    padding:30px;
-    border-radius:10px;
-    text-align:center;
-    width:300px;
+border:2px solid #00ff00;
+padding:30px;
+width:400px;
+text-align:center;
+box-shadow:0 0 20px #00ff00;
 }
 
 input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:6px;
-    border:none;
+width:90%;
+padding:10px;
+margin-top:10px;
+background:black;
+border:1px solid #00ff00;
+color:#00ff00;
+font-family:monospace;
 }
 
 button{
-    margin-top:20px;
-    padding:12px;
-    width:100%;
-    border:none;
-    border-radius:6px;
-    background:#22c55e;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
+margin-top:20px;
+padding:12px;
+width:95%;
+background:black;
+border:1px solid #00ff00;
+color:#00ff00;
+cursor:pointer;
+font-weight:bold;
 }
 
 button:hover{
-    background:#16a34a;
+background:#003300;
 }
 
-#result{
-    margin-top:15px;
-    font-weight:bold;
-    color:#4ade80;
+#terminal{
+margin-top:20px;
+text-align:left;
+font-size:14px;
 }
+
+.bar{
+height:10px;
+width:0%;
+background:#00ff00;
+margin-top:10px;
+}
+
+.progress{
+width:100%;
+border:1px solid #00ff00;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="container">
-    <h2>Enter IP</h2>
 
-    <input type="text" id="ipbox" placeholder="Type IP here">
+<h2>DUALHOOK TERMINAL</h2>
 
-    <button onclick="dualhook()">DUALHOOK!</button>
+<input type="text" placeholder="Enter IP address">
 
-    <div id="result"></div>
+<button onclick="startHack()">DUALHOOK!</button>
+
+<div id="terminal"></div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
 </div>
 
 <script>
-function dualhook(){
-    document.getElementById("result").innerText =
-    "Successfully dualhooked";
+
+function startHack(){
+
+let terminal = document.getElementById("terminal")
+let bar = document.getElementById("bar")
+
+terminal.innerHTML = "Connecting to server...<br>"
+bar.style.width="0%"
+
+setTimeout(()=>{
+terminal.innerHTML += "Locating target IP...<br>"
+bar.style.width="25%"
+},1000)
+
+setTimeout(()=>{
+terminal.innerHTML += "Injecting dualhook script...<br>"
+bar.style.width="55%"
+},2000)
+
+setTimeout(()=>{
+terminal.innerHTML += "Establishing connection...<br>"
+bar.style.width="80%"
+},3000)
+
+setTimeout(()=>{
+terminal.innerHTML += "<br>SUCCESSFULLY DUALHOOKED"
+bar.style.width="100%"
+},4000)
+
 }
+
 </script>
 
 </body>
