@@ -1,782 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Dualhook Demo</title>
-
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#0f172a;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.container{
-    background:#1e293b;
-    padding:30px;
-    border-radius:10px;
-    text-align:center;
-    width:300px;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:6px;
-    border:none;
-}
-
-button{
-    margin-top:20px;
-    padding:12px;
-    width:100%;
-    border:none;
-    border-radius:6px;
-    background:#22c55e;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#16a34a;
-}
-
-#result{
-    margin-top:15px;
-    font-weight:bold;
-    color:#4ade80;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-    <h2>Enter IP</h2>
-
-    <input type="text" id="ipbox" placeholder="Type IP here">
-
-    <button onclick="dualhook()">DUALHOOK!</button>
-
-    <div id="result"></div>
-</div>
-
-<script>
-function dualhook(){
-    document.getElementById("result").innerText =
-    "Successfully dualhooked";
-}
-</script>
-
-</body>
-</html>
-How it works
-
-User types something in the IP textbox.
-
-They click DUALHOOK!.
-
-JavaScript changes the text to “Successfully dualhooked.”
-
-✅ No server needed — it runs locally.
-
-If you want, I can also show you how to:
-
-🌐 Host it free on GitHub Pages
-
-🎨 Make it look like a hacker-style interface
-
-⚡ Add animations or sound effects when the button is clicked.
-
-how do i make it a website
-
-To turn your HTML file into an actual website on the internet, the easiest free method is GitHub Pages. It takes about 5 minutes. 🚀
-
-1️⃣ Create the HTML file
-
-Open Notepad (or any text editor).
-
-Paste the code you already have.
-
-Click File → Save As.
-
-Name it:
-
-index.html
-
-The name must be index.html because websites load that file first.
-
-2️⃣ Create a GitHub account
-
-Go to:
-👉 https://github.com
-
-Sign up if you don't have an account.
-
-3️⃣ Create a new repository
-
-Click New Repository
-
-Name it something like:
-
-mywebsite
-
-Set it to Public
-
-Click Create repository
-
-4️⃣ Upload your file
-
-Click Add file
-
-Click Upload files
-
-Upload your index.html
-
-Click Commit changes
-
-5️⃣ Turn on GitHub Pages
-
-Go to Settings in the repository.
-
-Click Pages in the left menu.
-
-Under Branch, choose:
-
-main
-
-Click Save.
-
-6️⃣ Your website will be live 🎉
-
-After about 30–60 seconds, your site will appear at:
-
-https://yourusername.github.io/mywebsite/
-
-Example:
-
-https://alex123.github.io/mywebsite/
-
-✅ Now anyone with the link can open your website.
-
-💡 If you want, I can also show you:
-
-A cooler hacker-style version of your page
-
-How to add a fake loading animation
-
-How to make it look like a real “terminal” website 🖥️
-
-I can see the problem in your screenshot. 👍
-Your file is named index.html.txt, but GitHub Pages only works if the file is named exactly index.html.
-
-Right now GitHub thinks it's a text file, not a webpage.
-
-✅ Fix it (very quick)
-1️⃣ Click the file
-
-Click index.html.txt in your repository.
-
-2️⃣ Click the ✏️ Edit button
-
-At the top right of the file view, click the pencil icon.
-
-3️⃣ Rename the file
-
-Change the filename from:
-
-index.html.txt
-
-to:
-
-index.html
-4️⃣ Scroll down and click
-
-Commit changes
-
-5️⃣ Turn on GitHub Pages
-
-Click Settings (top menu)
-
-Click Pages on the left
-
-Under Branch, choose:
-
-main
-
-then click Save.
-
-🌐 Your website link will be
-https://fadde5536-del.github.io/mywebsite453535/
-
-It may take 30–60 seconds to appear.
-
-✅ If you want, I can also show you how to make your page look like a real hacker terminal with a fake loading animation when "DUALHOOK!" is pressed. It will look much cooler. 😎
-
-how do i make it so noone has to download it to get on to the website
-
-Good news — if you use GitHub Pages, people do NOT need to download anything. They can just open a link in their browser like any normal website. 🌐
-
-Right now you just need to finish enabling it.
-
-1️⃣ Make sure the file name is correct
-
-Your file must be named exactly:
-
-index.html
-
-NOT:
-
-index.html.txt
-
-If it's .txt, rename it.
-
-2️⃣ Enable GitHub Pages
-
-Go to your repository.
-
-Click Settings (top menu).
-
-Click Pages on the left side.
-
-Under Branch, select:
-
-main
-
-Click Save.
-
-3️⃣ Wait about 30–60 seconds ⏳
-
-GitHub will create your website.
-
-Your link will be:
-
-https://fadde5536-del.github.io/mywebsite453535/
-
-Anyone can open that link in Chrome, Edge, Safari, or phone browsers — no downloads needed.
-
-Example
-
-If someone clicks your link, they will just see your webpage like this:
-
-textbox for IP
-
-DUALHOOK! button
-
-message appears when clicked
-
-Just like a normal website.
-
-✅ If you want, I can also show you how to make it:
-
-look like a real hacking terminal
-
-show "Connecting to server..." animation
-
-show fake progress bars
-
-make it look 10× more realistic
-
-It only takes one extra piece of code. 😎
-
-yes do that
-
-Here’s a cooler “terminal-style” version of your page with:
-
-🖥️ Hacker-style black/green terminal look
-
-⏳ Fake loading animation
-
-📊 Progress bar
-
-✅ Message: “Successfully dualhooked”
-
-Replace the code inside your index.html with this.
-
-Terminal Style Website Code
-<!DOCTYPE html>
 <html>
 <head>
-<title>Dualhook Terminal</title>
-
-<style>
-
-body{
-background:black;
-color:#00ff00;
-font-family:monospace;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.container{
-border:2px solid #00ff00;
-padding:30px;
-width:400px;
-text-align:center;
-box-shadow:0 0 20px #00ff00;
-}
-
-input{
-width:90%;
-padding:10px;
-margin-top:10px;
-background:black;
-border:1px solid #00ff00;
-color:#00ff00;
-font-family:monospace;
-}
-
-button{
-margin-top:20px;
-padding:12px;
-width:95%;
-background:black;
-border:1px solid #00ff00;
-color:#00ff00;
-cursor:pointer;
-font-weight:bold;
-}
-
-button:hover{
-background:#003300;
-}
-
-#terminal{
-margin-top:20px;
-text-align:left;
-font-size:14px;
-}
-
-.bar{
-height:10px;
-width:0%;
-background:#00ff00;
-margin-top:10px;
-}
-
-.progress{
-width:100%;
-border:1px solid #00ff00;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h2>DUALHOOK TERMINAL</h2>
-
-<input type="text" placeholder="Enter IP address">
-
-<button onclick="startHack()">DUALHOOK!</button>
-
-<div id="terminal"></div>
-
-<div class="progress">
-<div class="bar" id="bar"></div>
-</div>
-
-</div>
-
-<script>
-
-function startHack(){
-
-let terminal = document.getElementById("terminal")
-let bar = document.getElementById("bar")
-
-terminal.innerHTML = "Connecting to server...<br>"
-bar.style.width="0%"
-
-setTimeout(()=>{
-terminal.innerHTML += "Locating target IP...<br>"
-bar.style.width="25%"
-},1000)
-
-setTimeout(()=>{
-terminal.innerHTML += "Injecting dualhook script...<br>"
-bar.style.width="55%"
-},2000)
-
-setTimeout(()=>{
-terminal.innerHTML += "Establishing connection...<br>"
-bar.style.width="80%"
-},3000)
-
-setTimeout(()=>{
-terminal.innerHTML += "<br>SUCCESSFULLY DUALHOOKED"
-bar.style.width="100%"
-},4000)
-
-}
-
-</script>
-
-</body>
-</html>
-What it does
-
-When someone presses DUALHOOK! it will show:
-
-Connecting to server...
-Locating target IP...
-Injecting dualhook script...
-Establishing connection...
-
-SUCCESSFULLY DUALHOOKED
-
-With a progress bar filling up.
-
-After you upload it to GitHub
-
-Your website will be here:
-
-https://fadde5536-del.github.io/mywebsite453535/
-
-Anyone can open it without downloading anything.
-
-🔥 If you want, I can also show you how to add:
-
-Realistic typing animation (looks like real hacking)
-
-Matrix falling code background
-
-Fake IP tracker
-
-Sound effects
-
-That version looks 10× more real.
-
-its works but it dont work on iphone
-
-It likely doesn’t work on iPhone because of mobile layout issues (width, scaling, or viewport settings). You just need to add a mobile viewport tag and make the layout responsive. 📱
-
-Replace your index.html with this mobile-friendly version.
-
-<!DOCTYPE html>
-<html>
-<head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dualhook Terminal</title>
+<title>Network Scanner</title>
 
 <style>
 
 body{
-background:black;
-color:#00ff00;
-font-family:monospace;
+font-family:Arial, sans-serif;
+background:#f4f6f8;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 margin:0;
-padding:10px;
 }
 
 .container{
-border:2px solid #00ff00;
-padding:20px;
-width:100%;
-max-width:400px;
+background:white;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:420px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
 text-align:center;
-box-shadow:0 0 20px #00ff00;
+animation:fadeIn 0.8s ease;
+}
+
+h2{
+margin-bottom:15px;
 }
 
 input{
 width:100%;
-padding:10px;
-margin-top:10px;
-background:black;
-border:1px solid #00ff00;
-color:#00ff00;
-font-family:monospace;
-box-sizing:border-box;
-}
-
-button{
-margin-top:20px;
 padding:12px;
-width:100%;
-background:black;
-border:1px solid #00ff00;
-color:#00ff00;
-cursor:pointer;
-font-weight:bold;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:10px;
 font-size:16px;
 }
 
-button:hover{
-background:#003300;
-}
-
-#terminal{
-margin-top:20px;
-text-align:left;
-font-size:14px;
-word-wrap:break-word;
-}
-
-.bar{
-height:10px;
-width:0%;
-background:#00ff00;
-margin-top:10px;
-transition:width 0.5s;
-}
-
-.progress{
-width:100%;
-border:1px solid #00ff00;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<h2>DUALHOOK TERMINAL</h2>
-
-<input type="text" placeholder="Enter IP address">
-
-<button onclick="startHack()">DUALHOOK!</button>
-
-<div id="terminal"></div>
-
-<div class="progress">
-<div class="bar" id="bar"></div>
-</div>
-
-</div>
-
-<script>
-
-function startHack(){
-
-let terminal = document.getElementById("terminal")
-let bar = document.getElementById("bar")
-
-terminal.innerHTML = "Connecting to server...<br>"
-bar.style.width="0%"
-
-setTimeout(()=>{
-terminal.innerHTML += "Locating target IP...<br>"
-bar.style.width="25%"
-},1000)
-
-setTimeout(()=>{
-terminal.innerHTML += "Injecting dualhook script...<br>"
-bar.style.width="55%"
-},2000)
-
-setTimeout(()=>{
-terminal.innerHTML += "Establishing connection...<br>"
-bar.style.width="80%"
-},3000)
-
-setTimeout(()=>{
-terminal.innerHTML += "<br>SUCCESSFULLY DUALHOOKED"
-bar.style.width="100%"
-},4000)
-
-}
-
-</script>
-
-</body>
-</html>
-Why this fixes iPhone
-
-📱 meta viewport lets Safari scale the page correctly
-
-📏 max-width keeps the layout from breaking
-
-📦 box-sizing prevents inputs from overflowing
-
-🔄 transition makes the progress bar smoother
-
-✅ After replacing the code:
-
-Upload the new index.html to GitHub
-
-Wait ~30 seconds
-
-Refresh the site on your iPhone
-
-If you want, I can also show you how to make it look even cooler on phones with:
-
-🟢 Matrix falling code background
-
-⌨️ typing animation like real hacking
-
-🌐 auto-detect the visitor’s IP and display it (for demo purposes).
-
-can you make it so i can just put in the url so i can just not download it
-
-Yes 👍 — if you want people to just type a URL and open the site (without downloading anything), you need to host the website online. Since you’re already using GitHub, you’re actually very close.
-
-Step 1: Enable GitHub Pages
-
-Go to your repository.
-
-Click Settings.
-
-Click Pages on the left side.
-
-Under Source, select:
-
-Deploy from a branch
-
-Under Branch, choose:
-
-main
-
-Click Save.
-
-Step 2: Wait ~30–60 seconds ⏳
-
-GitHub will generate your website link.
-
-Your site will be:
-
-https://fadde5536-del.github.io/mywebsite453535/
-
-Anyone can open that link on iPhone, Android, or computer with no download required 🌐.
-
-Step 3: Share the link
-
-You can send the link like:
-
-https://fadde5536-del.github.io/mywebsite453535/
-
-People just tap it and the website opens.
-
-💡 Important fix from your screenshot:
-Your file was named:
-
-index.html.txt
-
-It must be:
-
-index.html
-
-or the website will not load.
-
-✅ If you want, I can also show you a crazy upgrade for your site that adds:
-
-🟢 Matrix hacker background
-
-⌨️ real typing animation
-
-🌐 auto-detect visitor IP
-
-📟 fake command terminal
-
-It will look way more realistic and cool.
-
-ok make it so theres a name serch at the top so when you type in a name a random ip show up make it so its 1000 ip combos and make it a fake slower so make say connecting to phone number and then a few seconds later DUALHOOKED!
-
-I can help you make a fun “hacker-style simulator” page, but it should be clearly a demo/simulation (not something pretending to actually access someone’s device or data). So we’ll make it generate random IPs and show fake progress messages for visual effect. 🖥️✨
-
-Below is a complete page that does what you described:
-
-🔎 Name search box at the top
-
-🎲 Generates a random IP (from many possible combinations)
-
-⏳ Shows slow terminal-style steps
-
-✅ Ends with “DUALHOOKED!”
-
-Replace your index.html with this:
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terminal Simulator</title>
-
-<style>
-
-body{
-background:black;
-color:#00ff00;
-font-family:monospace;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-padding:10px;
-}
-
-.container{
-border:2px solid #00ff00;
-padding:20px;
-width:100%;
-max-width:420px;
-text-align:center;
-box-shadow:0 0 15px #00ff00;
-}
-
-input{
-width:100%;
-padding:10px;
-margin-top:10px;
-background:black;
-border:1px solid #00ff00;
-color:#00ff00;
-font-family:monospace;
-box-sizing:border-box;
-}
-
 button{
-margin-top:15px;
-padding:12px;
 width:100%;
-background:black;
-border:1px solid #00ff00;
-color:#00ff00;
-font-weight:bold;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+background:#4CAF50;
+color:white;
+font-size:16px;
 cursor:pointer;
+transition:transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover{
-background:#003300;
+transform:translateY(-2px);
+box-shadow:0 5px 10px rgba(0,0,0,0.15);
 }
 
 #terminal{
 margin-top:20px;
 text-align:left;
+font-family:monospace;
 font-size:14px;
-}
-
-.bar{
-height:10px;
-width:0%;
-background:#00ff00;
-margin-top:10px;
-transition:width 0.5s;
+color:#333;
+line-height:1.6;
 }
 
 .progress{
-width:100%;
-border:1px solid #00ff00;
+margin-top:15px;
+height:10px;
+background:#eee;
+border-radius:10px;
+overflow:hidden;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:#4CAF50;
+transition:width 0.6s ease;
+}
+
+.fadeLine{
+opacity:0;
+animation:fadeLine 0.6s forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(15px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeLine{
+to{opacity:1;}
 }
 
 </style>
@@ -786,11 +103,11 @@ border:1px solid #00ff00;
 
 <div class="container">
 
-<h2>NETWORK TERMINAL</h2>
+<h2>Network Scanner</h2>
 
-<input id="nameInput" type="text" placeholder="Search name">
+<input id="nameInput" type="text" placeholder="Enter name">
 
-<button onclick="startScan()">SCAN</button>
+<button onclick="startScan()">Scan</button>
 
 <div id="terminal"></div>
 
@@ -804,41 +121,49 @@ border:1px solid #00ff00;
 
 function randomIP(){
 return Math.floor(Math.random()*256)+"."+
-       Math.floor(Math.random()*256)+"."+
-       Math.floor(Math.random()*256)+"."+
-       Math.floor(Math.random()*256);
+Math.floor(Math.random()*256)+"."+
+Math.floor(Math.random()*256)+"."+
+Math.floor(Math.random()*256);
+}
+
+function addLine(text){
+let terminal = document.getElementById("terminal")
+let line = document.createElement("div")
+line.className="fadeLine"
+line.innerHTML=text
+terminal.appendChild(line)
 }
 
 function startScan(){
 
-let name = document.getElementById("nameInput").value
-let terminal = document.getElementById("terminal")
-let bar = document.getElementById("bar")
-
-let ip = randomIP()
+let name=document.getElementById("nameInput").value
+let bar=document.getElementById("bar")
+let terminal=document.getElementById("terminal")
 
 terminal.innerHTML=""
 bar.style.width="0%"
 
-terminal.innerHTML += "Searching database for: "+name+"<br>"
+let ip=randomIP()
+
+addLine("Searching database for "+name+"...")
 
 setTimeout(()=>{
-terminal.innerHTML += "IP located: "+ip+"<br>"
+addLine("IP located: "+ip)
 bar.style.width="25%"
 },1500)
 
 setTimeout(()=>{
-terminal.innerHTML += "Connecting to phone network...<br>"
+addLine("Connecting to phone number...")
 bar.style.width="50%"
 },3000)
 
 setTimeout(()=>{
-terminal.innerHTML += "Injecting signal...<br>"
+addLine("Establishing connection...")
 bar.style.width="75%"
 },4500)
 
 setTimeout(()=>{
-terminal.innerHTML += "<br>DUALHOOKED!"
+addLine("<b>DUALHOOKED!</b>")
 bar.style.width="100%"
 },6000)
 
@@ -847,5 +172,4 @@ bar.style.width="100%"
 </script>
 
 </body>
-
 </html>
