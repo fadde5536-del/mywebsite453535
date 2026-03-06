@@ -8,7 +8,7 @@
 
 body{
 font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#6b3df5,#9b5cff);
+background:linear-gradient(135deg,#7b3cff,#ff4fd8);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -24,17 +24,19 @@ width:90%;
 max-width:420px;
 box-shadow:0 20px 40px rgba(0,0,0,0.25);
 text-align:center;
-animation:floatIn 0.8s ease;
+animation:floatIn 0.9s ease;
 transition:transform .3s;
 }
 
 .container:hover{
-transform:translateY(-4px);
+transform:translateY(-5px);
 }
 
 h2{
 margin-bottom:15px;
-color:#6b3df5;
+background:linear-gradient(90deg,#7b3cff,#ff4fd8);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 input{
@@ -48,8 +50,8 @@ transition:border .3s, box-shadow .3s;
 }
 
 input:focus{
-border-color:#8a63ff;
-box-shadow:0 0 8px rgba(138,99,255,0.5);
+border-color:#ff4fd8;
+box-shadow:0 0 10px rgba(255,79,216,0.5);
 outline:none;
 }
 
@@ -59,17 +61,16 @@ padding:12px;
 margin-top:15px;
 border:none;
 border-radius:12px;
-background:#7b4dff;
+background:linear-gradient(90deg,#7b3cff,#ff4fd8);
 color:white;
 font-size:16px;
 cursor:pointer;
-transition:transform .2s, box-shadow .2s, background .3s;
+transition:transform .2s, box-shadow .2s;
 }
 
 button:hover{
-background:#6a3cff;
-transform:translateY(-2px);
-box-shadow:0 6px 15px rgba(0,0,0,0.2);
+transform:translateY(-3px);
+box-shadow:0 8px 18px rgba(0,0,0,0.2);
 }
 
 #terminal{
@@ -93,7 +94,7 @@ overflow:hidden;
 .bar{
 height:100%;
 width:0%;
-background:linear-gradient(90deg,#7b4dff,#b07cff);
+background:linear-gradient(90deg,#7b3cff,#ff4fd8);
 transition:width .6s ease;
 }
 
@@ -108,13 +109,16 @@ transform:translateY(0) scale(1);
 }
 }
 
-.typing{
-border-right:2px solid #7b4dff;
-animation:blink .8s infinite;
+.typingCursor{
+display:inline-block;
+width:8px;
+background:#ff4fd8;
+margin-left:3px;
+animation:blink 1s infinite;
 }
 
 @keyframes blink{
-50%{border-color:transparent;}
+50%{opacity:0;}
 }
 
 </style>
@@ -124,7 +128,7 @@ animation:blink .8s infinite;
 
 <div class="container">
 
-<h2>Network Scanner</h2>
+<h2>Secure Scanner</h2>
 
 <input id="nameInput" type="text" placeholder="Enter name">
 
@@ -141,70 +145,67 @@ animation:blink .8s infinite;
 <script>
 
 function nameToIP(name){
-let hash=0
-for(let i=0;i<name.length;i++){
-hash=name.charCodeAt(i)+((hash<<5)-hash)
+if(name.toLowerCase()=="luke") return "172.45.92.188"
+if(name.toLowerCase()=="irene") return "104.73.201.55"
+return null
 }
 
-let ip=[
-(hash>>24)&255,
-(hash>>16)&255,
-(hash>>8)&255,
-hash&255
-].map(n=>Math.abs(n)%256)
-
-return ip.join(".")
-}
-
-function typeLine(text,delay){
+function typeText(text, delay){
 let terminal=document.getElementById("terminal")
 
 setTimeout(()=>{
 let line=document.createElement("div")
-line.textContent=text
 terminal.appendChild(line)
-terminal.scrollTop=terminal.scrollHeight
-},delay)
 
+let i=0
+let interval=setInterval(()=>{
+line.textContent+=text[i]
+i++
+if(i>=text.length){
+clearInterval(interval)
+}
+},20)
+
+},delay)
 }
 
 function startScan(){
 
-let name=document.getElementById("nameInput").value.trim()
+let name=document.getElementById("nameInput").value.trim().toLowerCase()
 let terminal=document.getElementById("terminal")
 let bar=document.getElementById("bar")
 
 terminal.innerHTML=""
 bar.style.width="0%"
 
-if(name===""){
-terminal.innerHTML="Enter a name first."
+let ip=nameToIP(name)
+
+if(!ip){
+terminal.innerHTML="Name not found in database."
 return
 }
 
-let ip=nameToIP(name)
-
-typeLine("Searching database for "+name+"...",0)
+typeText("Searching database for "+name+"...",0)
 
 setTimeout(()=>{
 bar.style.width="25%"
-typeLine("IP located: "+ip,100)
+typeText("IP located: "+ip,200)
 },1200)
 
 setTimeout(()=>{
 bar.style.width="50%"
-typeLine("Connecting to phone number...",100)
+typeText("Connecting to phone number...",200)
 },2600)
 
 setTimeout(()=>{
 bar.style.width="75%"
-typeLine("Establishing encrypted tunnel...",100)
-},4000)
+typeText("Establishing encrypted tunnel...",200)
+},4200)
 
 setTimeout(()=>{
 bar.style.width="100%"
-typeLine("DUALHOOKED!",100)
-},5400)
+typeText("DUALHOOKED!",200)
+},5600)
 
 }
 
