@@ -17,11 +17,12 @@ margin:0;
 }
 
 .container{
+position:relative;
 background:white;
 padding:30px;
 border-radius:25px;
 width:90%;
-max-width:420px;
+max-width:450px;
 box-shadow:0 20px 40px rgba(0,0,0,0.25);
 text-align:center;
 animation:floatIn 0.9s ease;
@@ -39,12 +40,18 @@ background:linear-gradient(90deg,#7b3cff,#ff4fd8);
 -webkit-text-fill-color:transparent;
 }
 
+.inputGroup{
+margin-top:10px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
 input{
 width:100%;
 padding:12px;
 border-radius:12px;
 border:2px solid #eee;
-margin-top:10px;
 font-size:16px;
 transition:border .3s, box-shadow .3s;
 }
@@ -121,6 +128,15 @@ animation:blink 1s infinite;
 50%{opacity:0;}
 }
 
+.onlyFor{
+position:absolute;
+top:10px;
+right:15px;
+font-size:14px;
+color:#ff4fd8;
+font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -128,9 +144,14 @@ animation:blink 1s infinite;
 
 <div class="container">
 
-<h2>Secure Scanner</h2>
+<div class="onlyFor">Only for Luke & Irene ❤️</div>
 
+<h2>Network Scanner</h2>
+
+<div class="inputGroup">
 <input id="nameInput" type="text" placeholder="Enter name">
+<input id="customIP" type="text" placeholder="Optional: enter custom IP">
+</div>
 
 <button onclick="startScan()">Scan</button>
 
@@ -144,12 +165,22 @@ animation:blink 1s infinite;
 
 <script>
 
+// Function to generate deterministic IP from a name
 function nameToIP(name){
-if(name.toLowerCase()=="luke") return "172.45.92.188"
-if(name.toLowerCase()=="irene") return "104.73.201.55"
-return null
+let hash=0
+for(let i=0;i<name.length;i++){
+hash=name.charCodeAt(i)+((hash<<5)-hash)
+}
+let ip=[
+(hash>>24)&255,
+(hash>>16)&255,
+(hash>>8)&255,
+hash&255
+].map(n=>Math.abs(n)%256)
+return ip.join(".")
 }
 
+// Typing animation for terminal
 function typeText(text, delay){
 let terminal=document.getElementById("terminal")
 
@@ -171,19 +202,21 @@ clearInterval(interval)
 
 function startScan(){
 
-let name=document.getElementById("nameInput").value.trim().toLowerCase()
+let name=document.getElementById("nameInput").value.trim()
+let customIP=document.getElementById("customIP").value.trim()
 let terminal=document.getElementById("terminal")
 let bar=document.getElementById("bar")
 
 terminal.innerHTML=""
 bar.style.width="0%"
 
-let ip=nameToIP(name)
-
-if(!ip){
-terminal.innerHTML="Name not found in database."
+if(name===""){
+terminal.innerHTML="Enter a name first."
 return
 }
+
+// Use custom IP if provided, otherwise generate from name
+let ip=customIP || nameToIP(name)
 
 typeText("Searching database for "+name+"...",0)
 
