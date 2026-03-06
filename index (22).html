@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D Glass Menu</title>
+<title>Neon Glass Menu</title>
 <style>
 body{
   margin:0;
   height:100vh;
   overflow:hidden;
-  background:#7b3cff;
-  perspective:1200px;
+  background:#000;
   display:flex;
   justify-content:center;
   align-items:center;
   font-family:Arial, sans-serif;
+  perspective:1000px;
 }
 
-/* Floating big bubbles */
+/* Floating bubbles */
 .bubble{
   position:absolute;
   border-radius:50%;
@@ -31,23 +31,33 @@ body{
   100% {transform: translateY(-10vh) translateX(50px) scale(1);}
 }
 
-/* Glass menu with 3D sides visible */
+/* Glass menu with neon edges */
 .container{
   width: 400px;
   padding: 30px;
   border-radius: 25px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-  transform: rotateY(-12deg) rotateX(5deg);
-  transition: transform 0.3s ease;
-  color: white;
-  text-align: center;
+  border: 2px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  box-shadow: 0 0 20px rgba(255,255,255,0.1), 0 0 15px #ff4fd8, 0 0 25px #7b3cff;
+  color:white;
+  text-align:center;
+  position:relative;
+  transition: transform 0.1s ease;
 }
 
-.container:hover{
-  transform: rotateY(0deg) rotateX(0deg);
+/* Animated neon border */
+@keyframes neonRainbow{
+  0%{border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);}
+  50%{border-image-source: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);}
+  100%{border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);}
+}
+
+.container{
+  animation: neonRainbow 4s linear infinite;
 }
 
 h2{
@@ -67,8 +77,8 @@ h2{
   flex:1;
   padding:12px;
   border-radius:12px;
-  border:2px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.2);
+  border:none;
+  background: rgba(255,255,255,0.15);
   color:white;
   font-size:16px;
 }
@@ -127,7 +137,7 @@ button{
 
 <div id="bubbleContainer"></div>
 
-<div class="container">
+<div class="container" id="menu">
   <div class="onlyFor">Only for Luke & Irene ❤️</div>
   <h2>Network Scanner</h2>
   <div class="inputGroup">
@@ -142,7 +152,7 @@ button{
 </div>
 
 <script>
-// Create big floating bubbles
+// Floating bubbles
 const bubbleContainer = document.getElementById('bubbleContainer');
 for(let i=0;i<20;i++){
   let b = document.createElement('div');
@@ -155,6 +165,14 @@ for(let i=0;i<20;i++){
   b.style.animationDelay = Math.random()*5+'s';
   bubbleContainer.appendChild(b);
 }
+
+// Menu follows cursor
+const menu = document.getElementById("menu");
+document.addEventListener("mousemove", e=>{
+  const x = (e.clientX - window.innerWidth/2)/40;
+  const y = (e.clientY - window.innerHeight/2)/40;
+  menu.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+});
 
 // Deterministic IP
 function nameToIP(name){
